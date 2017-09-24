@@ -203,10 +203,7 @@ module.exports = {
     "no-whitespace-before-property": "error",
     "no-with": "error",
     "object-curly-newline": "off",
-    "object-curly-spacing": [
-      "error",
-      "never"
-    ],
+    "object-curly-spacing": "off",
     "object-property-newline": [
       "error",
       {
@@ -233,8 +230,8 @@ module.exports = {
     "radix": "error",
     "require-jsdoc": "error",
     "rest-spread-spacing": "error",
-    "semi": "error",
-    "semi-spacing": "error",
+    "semi": "off",
+    "semi-spacing": "off",
     "sort-imports": "off",
     "sort-vars": "error",
     "space-before-blocks": "error",
