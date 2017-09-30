@@ -1,15 +1,17 @@
-import { define, circular } from 'teth/T'
+import { define } from 'teth/T'
+import route from 'teth/route'
 import cestre from 'teth/cestre'
-import './header.ctx'
-import './todo-list.ctx'
-import './app.fcd'
 const state = cestre.get()
 
-define('cmd: init-app', msg => {
-  console.log('init msg:', msg)
-  console.log('state:', state)
-  circular(cestre.didChangePattern)
-    .catch(error => {
-      console.error('error from sending did change message:', error)
-    })
-})
+import './header.ctx'
+import './todo-list.ctx'
+import './footer.ctx'
+import './app.fcd'
+
+const root = route('/#', 'route: all-todos')
+root.route('/active', 'route: active-todos')
+root.route('/completed', 'route: completed-todos')
+
+define('route: all-todos', state.mutate('activeRoute'), () => ['all'])
+define('route: active-todos', state.mutate('activeRoute'), () => ['active'])
+define('route: completed-todos', state.mutate('activeRoute'), () => ['completed'])

@@ -1,5 +1,5 @@
-// global css
-import { send } from 'teth/T'
+import { circular } from 'teth/T'
+import cestre from 'teth/cestre'
 import auid from 'teth/auid'
 import init from 'teth/init'
 import 'style-loader!css-loader!./theme/todo-mvc.css'
@@ -9,7 +9,7 @@ import './app/app.ctx'
 init({
   renderPattern: 'render: app',
   state: {
-    activeRoute: '',
+    activeRoute: 'all',
     newItemText: '',
     itemEdited: null,
     todoItems: [
@@ -54,5 +54,8 @@ init({
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-  send('cmd: init-app')
+  circular(cestre.didChangePattern)
+    .catch(error => {
+      console.error('error from sending did change message:', error)
+    })
 })

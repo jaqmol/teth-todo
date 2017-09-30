@@ -31,7 +31,7 @@
   "homepage": "https://github.com/micooz/es6-webpack-starter#readme",
   "dependencies": {
     "babel-polyfill": "^6.23.0",
-    "teth": "^0.9.9"
+    "teth": "^1.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
