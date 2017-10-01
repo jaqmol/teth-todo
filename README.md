@@ -2,10 +2,9 @@
 
 Todo app implemented in **[teth](https://github.com/jaqmol/teth)** and **T.**
 
+## What sets this one apart:
 
-## What set's this one apart:
-
-- Almost no use of conditionals by full Todo-MVC feature-set
+- Full Todo-MVC feature-set with just 3 conditionals
 - No usage of HTML
 - Very expressive:
   - Find source under `src/app` and see yourself

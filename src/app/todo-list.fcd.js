@@ -1,8 +1,12 @@
-import { define, send, context } from 'teth/T'
+import { define, send, context, match } from 'teth/T'
 import { li, section, input, label, ul, div, button } from 'teth/HTML'
 import cestre from 'teth/cestre'
 const state = cestre.get()
 const ctx = context.get('todo-list')
+const matchIsHidden = match()
+  .define('route: active, completed: true', () => true)
+  .define('route: completed, completed: false', () => true)
+  .unknown(() => false)
 
 define('render: todo-list',
   state('todoItems', 'itemEdited', 'activeRoute'),
@@ -20,8 +24,7 @@ define('render: todo-list',
           .class({
             completed: item.isCompleted,
             editing: itemEdited && (item.id === itemEdited.id),
-            hidden: ((activeRoute === 'active') && item.isCompleted) ||
-                    ((activeRoute === 'completed') && !item.isCompleted)
+            hidden: matchIsHidden.do({route: activeRoute, completed: item.isCompleted})
           })
           .content(
             div('.view')
