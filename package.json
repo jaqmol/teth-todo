@@ -1,7 +1,7 @@
 {
   "name": "teth-todo",
-  "version": "0.0.1",
-  "description": "Todo app implemented in **teth** and T.",
+  "version": "1.0.0",
+  "description": "Todo app implemented in Teth and T.",
   "scripts": {
     "postinstall": "cp env.example.js env.js",
     "start": "webpack-dev-server --config webpack/dev.config.js --watch",
@@ -31,7 +31,7 @@
   "homepage": "https://github.com/micooz/es6-webpack-starter#readme",
   "dependencies": {
     "babel-polyfill": "^6.23.0",
-    "teth": "^1.0.1"
+    "teth": "^1.0.9"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
