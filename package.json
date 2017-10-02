@@ -1,6 +1,6 @@
 {
   "name": "teth-todo",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Todo app implemented in Teth and T.",
   "scripts": {
     "postinstall": "cp env.example.js env.js",
@@ -23,15 +23,15 @@
     "sass",
     "css module"
   ],
-  "author": "Micooz",
+  "author": "Ronny Reichmann",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/micooz/es6-webpack-starter/issues"
+    "url": "https://github.com/jaqmol/teth-todo/issues"
   },
-  "homepage": "https://github.com/micooz/es6-webpack-starter#readme",
+  "homepage": "https://github.com/jaqmol/teth-todo",
   "dependencies": {
     "babel-polyfill": "^6.23.0",
-    "teth": "^1.0.13"
+    "teth": "^1.0.15"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -41,6 +41,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
     "clean-webpack-plugin": "^0.1.16",
     "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^5.0.1",
@@ -56,8 +57,10 @@
     "postcss-loader": "^2.0.6",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
+    "uglify-js-es6": "^2.8.9",
+    "uglifyes-webpack-plugin": "^0.4.3",
     "url-loader": "^0.5.9",
-    "webpack": "^3.1.0",
+    "webpack": "^3.6.0",
     "webpack-dev-server": "^2.5.1",
     "webpack-merge": "^4.1.0"
   }

@@ -19,8 +19,14 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
-        use: ['babel-loader', 'eslint-loader']
+        exclude: /node_modules\/route-parser/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: { presets: ['es2015'] }
+          },
+          'eslint-loader'
+        ],
       },
       {
         test: /\.json$/,
