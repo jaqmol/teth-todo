@@ -19,7 +19,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules\/route-parser/,
+        include: /node_modules\/teth/,
         use: [
           {
             loader: 'babel-loader',
