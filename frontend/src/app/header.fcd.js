@@ -1,8 +1,8 @@
 import { define, context } from 'teth/T'
 import { header, h1, input } from 'teth/HTML'
 import cestre from 'teth/cestre'
-const state = cestre.get()
-const ctx = context.get('header')
+const state = cestre()
+const ctx = context('header')
 
 define('render: header',
   state('newItemText'),

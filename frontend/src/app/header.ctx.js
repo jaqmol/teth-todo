@@ -2,8 +2,8 @@ import { context } from 'teth/T'
 import './header.fcd'
 import auid from 'teth/auid'
 import cestre from 'teth/cestre'
-const state = cestre.get()
-const ctx = context.get('header')
+const state = cestre()
+const ctx = context('header')
 
 ctx.define('cmd: create-new-todo',
   state.mutate('newItemText'),

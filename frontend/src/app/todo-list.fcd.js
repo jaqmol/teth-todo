@@ -1,8 +1,9 @@
 import { define, send, context, match } from 'teth/T'
 import { li, section, input, label, ul, div, button } from 'teth/HTML'
 import cestre from 'teth/cestre'
-const state = cestre.get()
-const ctx = context.get('todo-list')
+const state = cestre()
+const ctx = context('todo-list')
+
 const matchIsHidden = match()
   .define('route: active, completed: true', () => true)
   .define('route: completed, completed: false', () => true)

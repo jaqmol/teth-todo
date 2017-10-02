@@ -1,7 +1,7 @@
 // import { define } from 'teth/T'
 import route from 'teth/route'
 import cestre from 'teth/cestre'
-const state = cestre.get()
+const state = cestre()
 
 import './header.ctx'
 import './todo-list.ctx'

@@ -1,8 +1,8 @@
 import { define, context } from 'teth/T'
 import { button, footer, span, strong, ul, li, a } from 'teth/HTML'
 import cestre from 'teth/cestre'
-const state = cestre.get()
-const ctx = context.get('footer')
+const state = cestre()
+const ctx = context('footer')
 
 define('render: footer',
   state('todoItems', 'activeRoute'),

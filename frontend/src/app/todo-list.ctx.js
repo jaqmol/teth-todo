@@ -1,8 +1,8 @@
 import { context } from 'teth/T'
 import cestre from 'teth/cestre'
 import './todo-list.fcd'
-const ctx = context.get('todo-list')
-const state = cestre.get()
+const ctx = context('todo-list')
+const state = cestre()
 
 ctx.define('cmd: start-editing-todo',
   state.mutate('itemEdited'),

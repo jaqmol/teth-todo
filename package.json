@@ -1,12 +1,13 @@
 {
   "name": "teth-todo",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "Todo app implemented in Teth and T.",
   "scripts": {
     "postinstall": "cp env.example.js env.js",
     "start": "webpack-dev-server --config webpack/dev.config.js --watch",
     "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --color",
-    "precommit": "eslint src"
+    "precommit": "eslint src",
+    "server": "node be/server.js"
   },
   "repository": {
     "type": "git",
@@ -57,6 +58,7 @@
     "postcss-loader": "^2.0.6",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
+    "teth": "^1.0.17",
     "uglify-js-es6": "^2.8.9",
     "uglifyes-webpack-plugin": "^0.4.3",
     "url-loader": "^0.5.9",
