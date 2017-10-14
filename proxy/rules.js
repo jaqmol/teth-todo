@@ -1,4 +1,8 @@
 module.exports = {
+  '/api': {
+    target: 'http://localhost:3030',
+    secure: false
+  },
   '/node-0': {
     target: 'https://api.github.com',
     secure: true,

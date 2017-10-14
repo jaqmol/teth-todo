@@ -15,7 +15,7 @@ module.exports = webpackMerge(webpackCommon, {
   devtool: 'inline-source-map',
 
   output: {
-    path: path.resolve(__dirname, '../fe/static/dist'),
+    path: path.resolve(__dirname, '../frontend/static/dist'),
     filename: '[name].js',
     sourceMapFilename: '[name].map',
     chunkFilename: '[id]-chunk.js',
@@ -59,8 +59,8 @@ module.exports = webpackMerge(webpackCommon, {
     }),
     new HtmlWebpackPlugin({
       inject: true,
-      template: path.resolve(__dirname, '../fe/static/index.html'),
-      favicon: path.resolve(__dirname, '../fe/static/favicon.ico')
+      template: path.resolve(__dirname, '../frontend/static/index.html'),
+      favicon: path.resolve(__dirname, '../frontend/static/favicon.ico')
     }),
     new HotModuleReplacementPlugin()
   ],
@@ -68,7 +68,7 @@ module.exports = webpackMerge(webpackCommon, {
   devServer: {
     host: env.devServer.host || 'localhost',
     port: env.devServer.port || 3000,
-    contentBase: path.resolve(__dirname, '../fe/static'),
+    contentBase: path.resolve(__dirname, '../frontend/static'),
     watchContentBase: true,
     compress: true,
     hot: true,

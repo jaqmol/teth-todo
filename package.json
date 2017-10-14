@@ -7,7 +7,8 @@
     "start": "webpack-dev-server --config webpack/dev.config.js --watch",
     "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --color",
     "precommit": "eslint src",
-    "server": "node be/server.js"
+    "server": "node be/server.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -32,7 +33,7 @@
   "homepage": "https://github.com/jaqmol/teth-todo",
   "dependencies": {
     "babel-polyfill": "^6.23.0",
-    "teth": "^1.0.15"
+    "teth": "^1.0.25"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -53,12 +54,13 @@
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.29.0",
+    "jest": "^21.2.1",
     "json-loader": "^0.5.4",
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.6",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
-    "teth": "^1.0.17",
+    "teth": "^1.0.21",
     "uglify-js-es6": "^2.8.9",
     "uglifyes-webpack-plugin": "^0.4.3",
     "url-loader": "^0.5.9",

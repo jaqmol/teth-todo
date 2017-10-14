@@ -1,14 +1,18 @@
 # teth todo
 
-Todo app implemented in **[teth](https://github.com/jaqmol/teth)** and **T.**
+Todo app implemented in [**Teth**](https://github.com/jaqmol/teth) and **T.**
 
 ## What sets this one apart:
 
 - Full Todo-MVC feature-set with just 3 conditionals
 - No usage of HTML
 - Very expressive:
-  - Find source under `src/app` and see yourself
-  - See `src/app/todo-list.ctx.js` for implementation of main features
+  - Find source under `frontend/src/app` and see yourself
+  - See `frontend/src/app/todo-list.ctx.js` for implementation of main features
+
+## NEW IN 1.0.7
+
+Teth/RPC support added for backend-messaging.
 
 ## Start with NPM
 

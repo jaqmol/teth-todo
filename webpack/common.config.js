@@ -5,9 +5,9 @@ module.exports = {
 
   entry: {
     'app': [
-      './fe/src/main.js'
+      './frontend/src/main.js'
     ],
-    'vendor': './fe/src/vendor.js'
+    'vendor': './frontend/src/vendor.js'
   },
 
   resolve: {

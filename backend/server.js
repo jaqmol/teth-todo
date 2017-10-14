@@ -1,29 +1,61 @@
 const http = require('http')
-const PORT = process.env.PORT || 8080
-// var fs = require('fs')
-// var path = require('path')
+const PORT = 3030
+const valet = require('teth/valet')
+const { define } = require('teth/T')
+const auid = require('teth/auid')
+let allTodoItems = null
 
-http.createServer(function (request, response) {
-    console.log('request ', request.url);
-    // fs.readFile(filePath, function(error, content) {
-    //     if (error) {
-    //         if(error.code == 'ENOENT'){
-    //             fs.readFile('./404.html', function(error, content) {
-    //                 response.writeHead(200, { 'Content-Type': contentType });
-    //                 response.end(content, 'utf-8');
-    //             });
-    //         }
-    //         else {
-    //             response.writeHead(500);
-    //             response.end('Sorry, check with the site admin for error: '+error.code+' ..\n');
-    //             response.end();
-    //         }
-    //     }
-    //     else {
-    //         response.writeHead(200, { 'Content-Type': contentType });
-    //         response.end(content, 'utf-8');
-    //     }
-    // });
-}).listen(PORT)
+http.createServer(valet('/api')).listen(PORT)
 
-console.log('server running at port:', PORT)
+define('retrieve: all-todo-items', msg => {
+  return allTodoItems
+})
+define('add: todo-item', msg => {
+  allTodoItems = [...allTodoItems, msg.item]
+})
+define('update: todo-item', msg => {
+  allTodoItems = allTodoItems.map(item => item.id === msg.item.id ? msg.item : item)
+})
+define('remove: todo-item', msg => {
+  allTodoItems = allTodoItems.filter(item => item.id !== msg.id)
+})
+
+allTodoItems = [
+  {
+    text: 'buy bananas',
+    isCompleted: false,
+    id: auid()
+  },
+  {
+    text: 'buy apples',
+    isCompleted: false,
+    id: auid()
+  },
+  {
+    text: 'buy grapes',
+    isCompleted: false,
+    id: auid()
+  },
+  {
+    text: 'buy bread',
+    isCompleted: false,
+    id: auid()
+  },
+  {
+    text: 'buy pasta',
+    isCompleted: false,
+    id: auid()
+  },
+  {
+    text: 'buy passata',
+    isCompleted: false,
+    id: auid()
+  },
+  {
+    text: 'buy olive oil',
+    isCompleted: false,
+    id: auid()
+  }
+]
+
+console.log('server running on port:', PORT)

@@ -1,6 +1,7 @@
 import { context } from 'teth/T'
 import cestre from 'teth/cestre'
 import './todo-list.fcd'
+import remote from 'teth/remote'
 const ctx = context('todo-list')
 const state = cestre()
 
@@ -17,10 +18,13 @@ ctx.define('cmd: edit-todo',
 
 ctx.define('cmd: edit-todo, key: Enter',
   state.mutate('itemEdited', 'todoItems'),
-  (msg, itemEdited, todoItems) => [
-    null,
-    todoItems.map(item => item.id === itemEdited.id ? itemEdited : item)
-  ])
+  (msg, itemEdited, todoItems) => {
+    remote({update: 'todo-item', item: itemEdited}).catch(console.error)
+    return [
+      null,
+      todoItems.map(item => item.id === itemEdited.id ? itemEdited : item)
+    ]
+  })
 
 ctx.define('cmd: edit-todo, key: Escape',
   state.mutate('itemEdited'),
@@ -33,12 +37,15 @@ ctx.define('cmd: check-todo',
   state.mutate('todoItems'),
   (msg, todoItems) => [todoItems.map(item => {
     if (item.id === msg.id) {
-      console.log('should mark item completed', item)
       item.isCompleted = msg.checked
+      remote({update: 'todo-item', item}).catch(console.error)
     }
     return item
   })])
 
 ctx.define('cmd: remove-todo',
   state.mutate('todoItems'),
-  (msg, todoItems) => [todoItems.filter(item => item.id !== msg.id)])
+  (msg, todoItems) => {
+    remote({remove: 'todo-item', id: msg.id}).catch(console.error)
+    return [todoItems.filter(item => item.id !== msg.id)]
+  })
