@@ -10,7 +10,7 @@ Todo app implemented in [**Teth**](https://github.com/jaqmol/teth) and **T.**
   - Find source under `frontend/src/app` and see yourself
   - See `frontend/src/app/todo-list.ctx.js` for implementation of main features
 
-## NEW IN 1.0.7
+## NEW IN 1.0.10
 
 Teth/RPC support added for backend-messaging.
 

@@ -1,6 +1,6 @@
 {
   "name": "teth-todo",
-  "version": "1.0.7",
+  "version": "1.0.10",
   "description": "Todo app implemented in Teth and T.",
   "scripts": {
     "postinstall": "cp env.example.js env.js",
