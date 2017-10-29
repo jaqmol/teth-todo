@@ -43,6 +43,17 @@ ctx.define('cmd: check-todo',
     return item
   })])
 
+ctx.define('cmd: complete-all',
+  state.mutate('todoItems'),
+  (msg, todoItems) => {
+    const allItems = todoItems.map(item => {
+      item.isCompleted = msg.checked
+      return item
+    })
+    remote({updateAll: 'todo-items', allItems}).catch(console.error)
+    return [allItems]
+  })
+
 ctx.define('cmd: remove-todo',
   state.mutate('todoItems'),
   (msg, todoItems) => {

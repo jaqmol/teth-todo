@@ -1,13 +1,13 @@
 {
   "name": "teth-todo",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Todo app implemented in Teth and T.",
   "scripts": {
     "postinstall": "cp env.example.js env.js",
     "start": "webpack-dev-server --config webpack/dev.config.js --watch",
     "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --color",
     "precommit": "eslint src",
-    "server": "node be/server.js",
+    "server": "node backend/server.js",
     "test": "jest"
   },
   "repository": {
@@ -33,7 +33,9 @@
   "homepage": "https://github.com/jaqmol/teth-todo",
   "dependencies": {
     "babel-polyfill": "^6.23.0",
-    "teth": "^1.0.25"
+    "mkdirp": "^0.5.1",
+    "teth": "^1.0.33",
+    "teth-storage": "^1.0.3"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

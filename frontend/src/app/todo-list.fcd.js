@@ -17,7 +17,7 @@ define('render: todo-list',
       input('#toggle-all.toggle-all')
         .attrib({type: 'checkbox'})
         .on({change: e => {
-          send({ type: 'check', cmd: 'complete-all', value: e.target.checked })
+          ctx.send({cmd: 'complete-all', checked: e.target.checked})
         }}),
       label().attrib({for: 'toggle-all'}).content('Mark all as complete'),
       ul('.todo-list').content(
