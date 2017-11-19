@@ -1,5 +1,5 @@
 {
-  "name": "teth-todo",
+  "name": "teth-todo-actions-and-reducers",
   "version": "1.0.11",
   "description": "Todo app implemented in Teth and T.",
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jaqmol/teth-todo.git"
+    "url": "https://github.com/jaqmol/teth-todo-actions-and-reducers.git"
   },
   "keywords": [
     "es6",
@@ -28,9 +28,9 @@
   "author": "Ronny Reichmann",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jaqmol/teth-todo/issues"
+    "url": "https://github.com/jaqmol/teth-todo-actions-and-reducers/issues"
   },
-  "homepage": "https://github.com/jaqmol/teth-todo",
+  "homepage": "https://github.com/jaqmol/teth-todo-actions-and-reducers",
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "mkdirp": "^0.5.1",

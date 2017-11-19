@@ -4,13 +4,25 @@ import auid from 'teth/auid'
 import init from 'teth/init'
 import 'style-loader!css-loader!./theme/todo-mvc.css'
 import './theme/theme.scss'
-import './app/app.ctx'
+
+import { initApp, renderApp } from './action/app'
+
+import './facade/app'
+import './facade/header'
+import './facade/todo-list'
+import './facade/footer'
+
+import './reducer/app'
+import './reducer/header'
+import './reducer/todo-list'
+import './reducer/footer'
+
 import remote from 'teth/remote'
 
 remote.init('/api')
 
 init({
-  renderPattern: 'render: app',
+  renderPattern: renderApp.pattern(),
   state: {
     activeRoute: 'all',
     newItemText: '',
@@ -21,5 +33,6 @@ init({
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-  send('init: app')
+  send(initApp())
+    .catch(console.error)
 })

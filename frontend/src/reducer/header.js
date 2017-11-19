@@ -1,16 +1,18 @@
 import { context } from 'teth/T'
-import './header.fcd'
+import '../facade/header'
 import auid from 'teth/auid'
 import cestre from 'teth/cestre'
 import remote from 'teth/remote'
+import { createNewTodo } from '../action/header'
+import { insertNewTodoItem } from '../../../backend/actions'
 const state = cestre()
 const ctx = context('header')
 
-ctx.define('cmd: create-new-todo',
+ctx.define(createNewTodo.pattern(),
   state.mutate('newItemText'),
   (msg) => [msg.text])
 
-ctx.define('cmd: create-new-todo, key: Enter',
+ctx.define(createNewTodo.pattern({ key: 'Enter' }),
   state.mutate('todoItems', 'newItemText'),
   (msg, todoItems) => {
     const newTodoItem = {
@@ -18,7 +20,7 @@ ctx.define('cmd: create-new-todo, key: Enter',
       isCompleted: false,
       id: auid()
     }
-    remote({add: 'todo-item', item: newTodoItem}).catch(console.error)
+    remote(insertNewTodoItem(newTodoItem)).catch(console.error) // {add: 'todo-item', item: newTodoItem}
     const todoItemsReplacement = [...todoItems, newTodoItem ]
     const newItemTextReplacement = ''
     return [todoItemsReplacement, newItemTextReplacement]

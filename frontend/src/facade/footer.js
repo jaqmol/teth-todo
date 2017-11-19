@@ -1,10 +1,11 @@
 import { define, context } from 'teth/T'
 import { button, footer, span, strong, ul, li, a } from 'teth/HTML'
 import cestre from 'teth/cestre'
+import { renderFooter, removeCompletedTodos } from '../action/footer'
 const state = cestre()
-const ctx = context('footer')
+const footerSend = context('footer').send
 
-define('render: footer',
+define(renderFooter.pattern(),
   state('todoItems', 'activeRoute'),
   (msg, todoItems, activeRoute) => {
     const completedItemsCount = todoItems.reduce((acc, item) => acc + (item.isCompleted ? 1 : 0), 0)
@@ -15,7 +16,8 @@ define('render: footer',
       .content(
         span('.todo-count').content(
           strong().content(uncompletedItemsCount),
-          uncompletedItemsLabel),
+          uncompletedItemsLabel
+        ),
         ul('.filters').content(
           li().content(
             a().class({selected: activeRoute === 'all'})
@@ -37,8 +39,7 @@ define('render: footer',
           .class({hidden: completedItemsCount === 0})
           .on({click: () => {
             console.log('Should delete all completed')
-            ctx.send('cmd: remove-completed-todos')
-            // comp.clearAllCompletedItems()
+            footerSend(removeCompletedTodos())
           }})
           .content('Clear completed')
       )

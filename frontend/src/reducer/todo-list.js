@@ -1,62 +1,69 @@
 import { context } from 'teth/T'
 import cestre from 'teth/cestre'
-import './todo-list.fcd'
 import remote from 'teth/remote'
+import { updateTodoItem, updateManyTodoItems, removeTodoItem } from '../../../backend/actions'
+import {
+  startEditingTodo,
+  editTodo,
+  checkTodo,
+  checkManyTodos,
+  removeTodo
+} from '../action/todo-list'
 const ctx = context('todo-list')
 const state = cestre()
 
-ctx.define('cmd: start-editing-todo',
+ctx.define(startEditingTodo.pattern(),
   state.mutate('itemEdited'),
   (msg) => [Object.assign({}, msg.item)])
 
-ctx.define('cmd: edit-todo',
+ctx.define(editTodo.pattern(),
   state.mutate('itemEdited'),
   (msg, itemEdited) => {
     itemEdited.text = msg.text
     return [itemEdited]
   })
 
-ctx.define('cmd: edit-todo, key: Enter',
+ctx.define(editTodo.pattern({ key: 'Enter' }),
   state.mutate('itemEdited', 'todoItems'),
   (msg, itemEdited, todoItems) => {
-    remote({update: 'todo-item', item: itemEdited}).catch(console.error)
+    remote(updateTodoItem(itemEdited)).catch(console.error)
     return [
       null,
       todoItems.map(item => item.id === itemEdited.id ? itemEdited : item)
     ]
   })
 
-ctx.define('cmd: edit-todo, key: Escape',
+ctx.define(editTodo.pattern({ key: 'Escape' }),
   state.mutate('itemEdited'),
   msg => {
     msg.event.preventDefault()
     return [null]
   })
 
-ctx.define('cmd: check-todo',
+ctx.define(checkTodo.pattern(),
   state.mutate('todoItems'),
   (msg, todoItems) => [todoItems.map(item => {
     if (item.id === msg.id) {
       item.isCompleted = msg.checked
-      remote({update: 'todo-item', item}).catch(console.error)
+      remote(updateTodoItem(item)).catch(console.error)
     }
     return item
   })])
 
-ctx.define('cmd: complete-all',
+ctx.define(checkManyTodos.pattern(),
   state.mutate('todoItems'),
   (msg, todoItems) => {
     const allItems = todoItems.map(item => {
       item.isCompleted = msg.checked
       return item
     })
-    remote({updateAll: 'todo-items', allItems}).catch(console.error)
+    remote(updateManyTodoItems(allItems)).catch(console.error)
     return [allItems]
   })
 
-ctx.define('cmd: remove-todo',
+ctx.define(removeTodo.pattern(),
   state.mutate('todoItems'),
   (msg, todoItems) => {
-    remote({remove: 'todo-item', id: msg.id}).catch(console.error)
+    remote(removeTodoItem(msg.id)).catch(console.error)
     return [todoItems.filter(item => item.id !== msg.id)]
   })

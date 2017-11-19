@@ -1,5 +1,13 @@
 import { define, send, context, match } from 'teth/T'
 import { li, section, input, label, ul, div, button } from 'teth/HTML'
+import {
+  renderTodoList,
+  startEditingTodo,
+  editTodo,
+  checkTodo,
+  checkManyTodos,
+  removeTodo
+} from '../action/todo-list'
 import cestre from 'teth/cestre'
 const state = cestre()
 const ctx = context('todo-list')
@@ -9,7 +17,7 @@ const matchIsHidden = match()
   .define('route: completed, completed: false', () => true)
   .unknown(() => false)
 
-define('render: todo-list',
+define(renderTodoList.pattern(),
   state('todoItems', 'itemEdited', 'activeRoute'),
   (msg, todoItems, itemEdited, activeRoute) => section('.main')
     .class('hidden', todoItems.length > 0)
@@ -17,7 +25,7 @@ define('render: todo-list',
       input('#toggle-all.toggle-all')
         .attrib({type: 'checkbox'})
         .on({change: e => {
-          ctx.send({cmd: 'complete-all', checked: e.target.checked})
+          ctx.send(checkManyTodos(e.target.checked))
         }}),
       label().attrib({for: 'toggle-all'}).content('Mark all as complete'),
       ul('.todo-list').content(
@@ -30,28 +38,23 @@ define('render: todo-list',
           .content(
             div('.view')
               .on({dblclick: () => {
-                ctx.send({ cmd: 'start-editing-todo', item })
+                ctx.send(startEditingTodo(item))
               }})
               .content(
                 input('.toggle')
                   .attrib({type: 'checkbox', id: item.id})
                   .prop({checked: item.isCompleted})
                   .on({change: e => {
-                    ctx.send({cmd: 'check-todo', id: item.id, checked: e.target.checked})
+                    ctx.send(checkTodo(item.id, e.target.checked))
                   }}),
                 label().content(item.text),
                 button('.destroy').on({click: () => {
-                  ctx.send({cmd: 'remove-todo', id: item.id})
+                  ctx.send(removeTodo(item.id))
                 }})),
             input('.edit')
               .attrib({value: item.text})
-              .on({keypress: event => {
-                ctx.circular({
-                  cmd: 'edit-todo',
-                  key: event.key,
-                  text: event.target.value,
-                  event
-                })
+              .on({keypress: e => {
+                ctx.circular(editTodo(e.key, e.target.value, e))
               }}))
         )
       )
